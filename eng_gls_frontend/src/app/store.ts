@@ -1,9 +1,17 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
-import counterReducer from '../features/counter/counterSlice';
+import usersReducer from '../features/users/userSlice';
+import tokenDataReducer from '../features/token/tokenDataSlice';
+import generalAppReducer from '../features/generalAppSlice';
+import glossaryReducer from '../features/glossary/glossarySlice';
+import wordingReducer from '../features/glossary/wordInGlsSlice';
 
 export const store = configureStore({
   reducer: {
-    counter: counterReducer,
+    users: usersReducer,
+    token_data: tokenDataReducer,
+    general_app: generalAppReducer,
+    gls: glossaryReducer,
+    wig: wordingReducer
   },
 });
 

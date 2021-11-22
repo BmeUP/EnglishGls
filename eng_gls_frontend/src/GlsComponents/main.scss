@@ -1,0 +1,151 @@
+.container{
+    display: flex;
+    height: 100%;
+    max-width: 100%;
+    flex-direction: column;
+}
+
+.header{
+    display: flex;
+    width: 100%;
+    height: 30px;
+    justify-content: end;
+    border-bottom: 1px solid aqua;
+}
+
+.general-area{
+  display: flex;
+  height: 100%;
+}
+
+.right-menu{
+  height: 100%;
+  width: 20%;
+  border-right: 1px solid aqua;
+}
+
+/*-- Sign Styles --*/
+
+.word {
+    padding: 0 20px 0 0;
+    font-size: 25px;
+    text-align: center;
+    line-height: 1;
+    color: #c6e2ff;
+    animation: neon .08s ease-in-out infinite alternate;
+  }
+  
+  /*-- Animation Keyframes --*/
+  
+  // animation
+  
+  @keyframes neon {
+    from {
+      text-shadow:
+      0 0 6px rgba(202,228,225,0.92),
+      0 0 30px rgba(202,228,225,0.34),
+      0 0 12px rgba(30,132,242,0.52),
+      0 0 21px rgba(30,132,242,0.92),
+      0 0 34px rgba(30,132,242,0.78),
+      0 0 54px rgba(30,132,242,0.92);
+    }
+    to {
+      text-shadow:
+      0 0 6px rgba(202,228,225,0.98),
+      0 0 30px rgba(202,228,225,0.42),
+      0 0 12px rgba(30,132,242,0.58),
+      0 0 22px rgba(30,132,242,0.84),
+      0 0 38px rgba(30,132,242,0.88),
+      0 0 60px rgba(30,132,242,1);
+    }
+  }
+
+
+  
+
+.add-btn{
+  color: aquamarine;
+  border: 1px solid aqua;
+  margin: 5px;
+  cursor: pointer;
+  padding: 0 0 0 5px;
+  text-align: center;
+}
+
+.add-gls-btn{
+  @extend .add-btn;
+  margin: 0;
+  margin-top: 5px !important;
+}
+
+.create-gls-modal{
+  position: absolute;
+  left: 1%;
+  top: 30%;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  background: -webkit-linear-gradient(to right, #136a8a, #267871); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #136a8a, #267871); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.create-word-modal{
+  position: absolute;
+  left: 1%;
+  top: 30%;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  background: -webkit-linear-gradient(to right, #136a8a, #267871); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #136a8a, #267871); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.glossaries-lst{
+  display: flex;
+  height: 100%;
+  color: aqua;
+  flex-direction: column;
+  padding-left: 10px;
+  cursor: pointer;
+}
+
+.glossary-main{
+  padding: 20px 20px 0px 20px;
+  position: relative;
+  width: 100%;
+}
+
+.add-word-btn{
+  @extend .add-btn;
+  margin: 10px 0 0 0;
+  width: 200px;
+}
+
+.d-f{
+  display: flex;
+}
+
+.general-table{
+  border: 1px solid #C0E1FE;
+  color: aquamarine;
+}
+
+.table-caption{
+  @extend .general-table;
+  font-size: 20px;
+  border-bottom: unset;
+}
+
+.table-parent{
+  @extend .general-table;
+  margin-top: 20px;
+  border-collapse: collapse; 
+}
+
+.table-borders{
+  border: 1px solid;
+}
+
+.text-a{
+  text-align: center;
+}

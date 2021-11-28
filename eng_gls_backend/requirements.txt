@@ -5,7 +5,7 @@ darglint==1.8.0
 Django==3.2.8
 django-cors-headers==3.10.0
 djangorestframework==3.12.4
-djangorestframework-simplejwt==4.8.0
+djangorestframework-simplejwt==5.0.0
 docutils==0.17.1
 eradicate==2.0.0
 flake8-broken-line==0.3.0

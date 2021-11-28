@@ -12,6 +12,18 @@ jobs:
       max-parallel: 4
       matrix:
         python-version: [3.9]
+    
+    services:
+      postgres:
+        image: postgres:latest
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: github_actions
+        ports:
+          - 5432:5432
+        # needed because the postgres container does not provide a healthcheck
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
 
     steps:
     - uses: actions/checkout@v2
@@ -19,6 +31,7 @@ jobs:
       uses: actions/setup-python@v2
       with:
         python-version: ${{ matrix.python-version }}
+
     - name: Add Secretes
       run: |
         echo DB_NAME=${{ secrets.DB_NAME }} >> ./eng_gls_backend/.env
@@ -26,10 +39,16 @@ jobs:
         echo DB_PASSWORD=${{ secrets.DB_PASSWORD }} >> ./eng_gls_backend/.env
         echo HOST=${{ secrets.HOST }} >> ./eng_gls_backend/.env
         echo SECRET_KEY=${{ secrets.SECRET_KEY }} >> ./eng_gls_backend/.env
+
     - name: Install Dependencies
       run: |
         python -m pip install --upgrade pip
         pip install -r ./eng_gls_backend/requirements.txt
+    - name: Run migrations
+      run: |
+        cd eng_gls_backend/
+        python manage.py migrate
+
     - name: Run Tests
       run: |
         cd eng_gls_backend/

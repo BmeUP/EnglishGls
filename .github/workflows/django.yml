@@ -32,7 +32,8 @@ jobs:
         pip install -r ./eng_gls_backend/requirements.txt
     - name: Run Tests
       run: |
-        python ./eng_gls_backend/manage.py test
+        cd eng_gls_backend/
+        python manage.py test
     - name: Log in to GitHub Packages
       if: success()
       run: echo ${{ secrets.PAT }} | docker login ghcr.io -u ${{ secrets.OWNER_NAME }} --password-stdin

@@ -55,7 +55,7 @@ jobs:
         SSH_AUTH_SOCK: /tmp/ssh_agent.sock
       run: |
         ssh -o StrictHostKeyChecking=no root@${{ secrets.DIGITAL_OCEAN_IP_ADDRESS }} << 'ENDSSH'
-          cd /app
+          cd app
           ./docker_rebuild.sh
         ENDSSH
 

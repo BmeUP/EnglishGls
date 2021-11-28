@@ -10,14 +10,13 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 from pathlib import Path
+
 from django.core.management.utils import get_random_secret_key
-try:
-    from .env import Sercete
-except ModuleNotFoundError:
-    from .ci_env import Sercete
+from dotenv import dotenv_values
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+config = dotenv_values(BASE_DIR/".env")
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
@@ -89,10 +88,10 @@ WSGI_APPLICATION = 'eng_gls.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': Sercete.DB_NAME,
-        'USER': Sercete.DB_USER,
-        'PASSWORD': Sercete.DB_PASSWORD,
-        'HOST': 'db',
+        'NAME': config.get('DB_NAME'),
+        'USER': config.get('DB_USER'),
+        'PASSWORD': config.get('DB_PASSWORD'),
+        'HOST': config.get('HOST'),
         'PORT': 5432,
     }
     

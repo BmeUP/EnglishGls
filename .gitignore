@@ -136,6 +136,5 @@ nginx/
 data/
 docker/
 .env
-env.py
 
 django_static/

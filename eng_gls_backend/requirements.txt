@@ -4,7 +4,6 @@ attrs==21.2.0
 darglint==1.8.0
 Django==3.2.8
 django-cors-headers==3.10.0
-django-environ==0.8.1
 djangorestframework==3.12.4
 djangorestframework-simplejwt==4.8.0
 docutils==0.17.1
@@ -34,6 +33,7 @@ pydocstyle==6.1.1
 pyflakes==2.3.1
 Pygments==2.10.0
 PyJWT==2.1.0
+python-dotenv==0.19.2
 pytz==2021.3
 PyYAML==5.4.1
 restructuredtext-lint==1.3.2

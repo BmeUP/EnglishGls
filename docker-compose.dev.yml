@@ -13,7 +13,7 @@ services:
   backend-service-dev:
     restart: always
     build: eng_gls_backend/
-    entrypoint: /app/back-end/entrypoint.sh
+    entrypoint: /app/back-end/entrypoint_dev.sh
     volumes:
       - ./eng_gls_backend:/app/back-end
     ports:

@@ -6,9 +6,9 @@ services:
     volumes:
       - ./data/db:/var/lib/postgresql/data
     environment:
-      - POSTGRES_DB='glossary_db'
-      - POSTGRES_USER='glossaryuser'
-      - POSTGRES_PASSWORD='Cjkjdtqt,tnrereire'
+      - POSTGRES_DB='*'
+      - POSTGRES_USER='*'
+      - POSTGRES_PASSWORD='*'
       
   backend-service-dev:
     restart: always

@@ -23,6 +23,7 @@ class UserSerializer(serializers.ModelSerializer):
         if errors:
             raise serializers.ValidationError(errors)
         
-        validated_data['password'] = make_password(validated_data.get('password')) 
+        validated_data['password'] = make_password(
+            validated_data.get('password'))
 
         return User.objects.create(**validated_data)

@@ -20,5 +20,5 @@
 
 # Option 2:
 # run development server
-./manage.py test
+# ./manage.py test
 DEBUG=True ./manage.py runserver 0.0.0.0:8000

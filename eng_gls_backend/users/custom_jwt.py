@@ -30,8 +30,10 @@ class MyTokenObtainPairView(TokenObtainPairView):
             raise InvalidToken(e.args[0])
         
         resp = Response(serializer.validated_data, status=status.HTTP_200_OK)
-        resp.set_cookie('access', serializer.validated_data['access'], secure=True, httponly=True)
-        resp.set_cookie('refresh', serializer.validated_data['refresh'], secure=True, httponly=True)
+        resp.set_cookie('access', serializer.validated_data['access'],
+                        secure=False, httponly=True)
+        resp.set_cookie('refresh', serializer.validated_data['refresh'],
+                        secure=False, httponly=True)
         del resp.data['refresh']
         return resp
 

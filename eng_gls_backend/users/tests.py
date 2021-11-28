@@ -9,7 +9,7 @@ class UserTestCase(TestCase):
             password="12345678qQ"
             )
 
-    def test_animals_can_speak(self):
-        """User equaloty"""
+    def test_users(self):
+        """User equality"""
         test_user = User.objects.get(username="testuser")
-        self.assertEqual(test_user.email, 'test@user.com')
+        self.assertEqual(test_user.email, 'test@user1.com')

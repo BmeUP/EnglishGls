@@ -21,7 +21,7 @@ function getGlossaries(d: any){
   ).catch(
     e => {
       API.post(
-        'api/token/refresh',
+        'api/token/refresh/',
         {withCredentials: true}
       )
     }

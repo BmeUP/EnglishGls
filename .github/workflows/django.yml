@@ -24,7 +24,7 @@ jobs:
         python -m pip install --upgrade pip
         pwd
         ls -l
-        pip install -r requirements.txt
+        pip install -r ./eng_gls_backend/requirements.txt
     - name: Run Tests
       run: |
         python manage.py test

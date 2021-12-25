@@ -12,7 +12,6 @@ import { setUserID, setUserName } from '../features/token/tokenDataSlice';
 
 
 function get_token(user: User, dispatch: any, history: any):any{
-    let data: any = {};
     API.post(
         'api/token/',
         {

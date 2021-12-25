@@ -1,15 +1,29 @@
-from django.test import TestCase
+import logging
+
+from django.test import Client
+from django.contrib.auth.hashers import make_password
+from rest_framework.test import APITestCase
+
 from users.models import User
 
-class UserTestCase(TestCase):
-    def setUp(self):
-        User.objects.create(
-            username="testuser",
-            email="test@user.com",
-            password="12345678qQ"
-            )
 
+class BaseSetUp(APITestCase):
+    def setUp(self) -> None:
+        User.objects.create(username='TestUser', 
+            password=make_password('testpwd123'), 
+            email='test@user.com')
+    
+    def sign_in(self) -> Client:
+        data = {
+            'username': 'TestUser',
+            'password': 'testpwd123'
+        }
+        r = self.client.post('/api/token/', data=data)
+        self.assertEqual(r.status_code, 200)
+        return self.client
+
+class UserTestCase(BaseSetUp):
     def test_users(self):
         """User equality"""
-        test_user = User.objects.get(username="testuser")
-        self.assertEqual(test_user.email, 'test@user1.com')
+        test_user = User.objects.get(username='TestUser')
+        self.assertEqual(test_user.email, 'test@user.com')

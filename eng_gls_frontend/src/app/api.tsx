@@ -12,15 +12,4 @@ const ax = axios.create({
   baseURL: selectURL()
 });
 
-// ax.interceptors.response.use(function (response) {
-//   // Do something with response data
-//   console.info(['response elbakidze'])
-//   return response;
-// }, function (error) {
-//   console.info(['elbakidze', error.response.data.code]);
-//   if(error.response.data.code){
-//     ax.post('api/token/refresh', {refresh: 'abc'}, {withCredentials: true});
-//   }
-// });
-
 export default ax

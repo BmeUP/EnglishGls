@@ -53,17 +53,20 @@ jobs:
       run: |
         cd eng_gls_backend/
         python manage.py test
-    - name: Log in to GitHub Packages
+
+    - name: Log in to GitHub Containers
       if: success()
       run: echo ${{ secrets.PAT }} | docker login ghcr.io -u ${{ secrets.OWNER_NAME }} --password-stdin
     - name: Build Images
       run: |
         docker build ./eng_gls_backend/. -t ${{ secrets.TAG_BACKEND }}
         docker build ./eng_gls_frontend/. -t ${{ secrets.TAG_FRONTEND }}
+
     - name: Push Images
       run: |
         docker push ${{ secrets.TAG_BACKEND }}
         docker push ${{ secrets.TAG_FRONTEND }}
+
     - name: Add the private SSH key to the ssh-agent
       env:
         SSH_AUTH_SOCK: /tmp/ssh_agent.sock
@@ -72,6 +75,7 @@ jobs:
         ssh-agent -a $SSH_AUTH_SOCK > /dev/null
         ssh-keyscan github.com >> ~/.ssh/known_hosts
         ssh-add - <<< "${{ secrets.PRIVATE_KEY }}"
+
     - name: Deploy images on DigitalOcean
       env:
         SSH_AUTH_SOCK: /tmp/ssh_agent.sock

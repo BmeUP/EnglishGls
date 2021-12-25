@@ -2,11 +2,13 @@ import logging
 from rest_framework import generics, response, status
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
-from .models import Glossary, Word, WordInGlossary
+
+from .models import Glossary, WordInGlossary
 from .serializers import (GlossarySerializer,
                           CreateWordInGlossarySerializer,
-                          TranslationSerializer, WordInGlossarySerializer, WordSerializer)
+                          TranslationSerializer, WordInGlossarySerializer)
 from users.custom_jwt import CookieAuthJWT
+from .services import word_gls_ser
 
 
 class CreateGlossary(generics.CreateAPIView):
@@ -16,6 +18,7 @@ class CreateGlossary(generics.CreateAPIView):
 
     def post(self, request, *args, **kwargs):
         data = request.data
+        data._mutable = True
         data.update({
             "owner": request.user.id
         })
@@ -67,25 +70,12 @@ class CreateWord(APIView):
                 data={
                     "word": request.data.get('word'),
                     "glossary_id": request.data.get('glossary_id')})
-        
-        if word_gls_serializer.is_valid():
-            wig = word_gls_serializer.save()
-            t_data = request.data.get('translation')
-            t_data.update({
-                    "translation_owner": request.user.id,
-                    "for_word": wig.word.id})
-            translation_serializer = TranslationSerializer(
-                data=t_data)
-            
-            if translation_serializer.is_valid():
-                translation_serializer.save()
-                return response.Response(word_gls_serializer.data)
-            return response.Response(
-                data = {
-                    "translation_gls_errors": translation_serializer.errors},
-                status=status.HTTP_400_BAD_REQUEST)
-        
-        return response.Response(
-                data = {
-                    "word_gls_errors": word_gls_serializer.errors},
-                status=status.HTTP_400_BAD_REQUEST)
+        res = word_gls_ser(word_gls_serializer, request, TranslationSerializer)
+        return res
+
+
+class DeleteGlossary(generics.DestroyAPIView):
+    """Delete owner`s glossary"""
+    authentication_classes = [CookieAuthJWT]
+    permission_classes = [IsAuthenticated]
+    queryset = Glossary.objects.all()

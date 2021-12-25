@@ -9,6 +9,7 @@ import { Glossary } from '../models/glossary';
 import ConcreteGls from './ConcreteGlsComponent';
 import { WordWithTranslation } from '../models/word';
 import { setUserName } from '../features/token/tokenDataSlice';
+import trash from '../static/trash.png';
 
 
 function getGlossaries(d: any){
@@ -54,6 +55,16 @@ function retriveUserData(user_name: string, d: any){
   }
 }
 
+function deleteGls(d: any, gls_id: number) {
+  API.delete(
+    `api/delete-gls/${gls_id}`,
+    {withCredentials: true}
+  ).then(
+    res => {
+      getGlossaries(d);
+    }
+  )
+}
 
 function MainGls() {
   const toke_data = useSelector((state: RootState) => state.token_data);
@@ -87,9 +98,11 @@ function MainGls() {
               </div>
               <div className="glossaries-lst">
                 {general_a.glossaries.map((g) => (
-                  <span onClick={() => loadGls(g, dispatch)}>
-                    {g.title}
-                  </span>
+                  <div className='gls-title' >
+                    <span onClick={() => loadGls(g, dispatch)}>{g.title}</span>
+                    <img src={trash} className='delete-icon' 
+                        onClick={() => deleteGls(dispatch, g.id)}/>
+                  </div>
                   ))}
               </div>
             </div>

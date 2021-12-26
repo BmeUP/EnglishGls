@@ -17,8 +17,7 @@ class CreateGlossary(generics.CreateAPIView):
     permission_classes = [IsAuthenticated]
 
     def post(self, request, *args, **kwargs):
-        data = request.data
-        data._mutable = True
+        data = request.data.copy()
         data.update({
             "owner": request.user.id
         })
